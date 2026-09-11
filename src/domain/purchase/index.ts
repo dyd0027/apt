@@ -4,7 +4,7 @@ import { purchaseCosts } from '../tax';
 import { amortize } from '../mortgage';
 import { eligibility, loanCapacity } from '../mortgage/products';
 export const defaultTerms: LoanTerms = {
-  rate: 0.041,
+  rate: 0.05,
   years: 30,
   rateType: 'hybrid',
   fixedYears: 5,

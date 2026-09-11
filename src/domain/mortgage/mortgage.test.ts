@@ -13,6 +13,13 @@ import { currentPolicy } from '../policy/mock';
 import { eligibility, mockProducts } from './products';
 import { defaultAssets } from '../assets';
 describe('mortgage', () => {
+  it('keeps the default and mock product rates within the 4.7–5.5% planning range', () => {
+    expect(defaultTerms.rate).toBe(0.05);
+    const rates = mockProducts.flatMap((product) => [product.rate, product.advertisedRate]);
+    expect(Math.min(...rates)).toBe(0.047);
+    expect(Math.max(...rates)).toBe(0.055);
+    expect(rates.every((rate) => rate >= 0.047 && rate <= 0.055)).toBe(true);
+  });
   it('matches a known annuity payment', () =>
     expect(monthlyPayment(100_000_000, 0.04, 360)).toBe(477416));
   it('handles zero interest and zero principal', () => {
@@ -48,7 +55,7 @@ describe('mortgage', () => {
     expect(amortize(1_000_000, t, 0.02)).toEqual(amortize(1_000_000, t));
   });
   it('separates stress from repayment rate and respects existing debt', () => {
-    expect(stressRate(defaultTerms, currentPolicy)).toBeCloseTo(0.071);
+    expect(stressRate(defaultTerms, currentPolicy)).toBeCloseTo(0.08);
     expect(dsrLoanLimit(100_000_000, 40_000_000, defaultTerms, currentPolicy)).toBe(0);
     expect(dsr(40, 100)).toBe(0.4);
     expect(dsr(1, 0)).toBe(Infinity);
