@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+model PolicyVersion {
+  id            String   @id @default(cuid())
+  version       String   @unique
+  effectiveDate DateTime
+  checkedAt     DateTime
+  source        Json
+  rules         Json
+  isMock        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  @@index([effectiveDate])
+}
+model PolicyCheck {
+  id        String   @id @default(cuid())
+  checkedAt DateTime @default(now())
+  version   String
+  changed   Boolean
+  @@index([checkedAt])
+}
+model AssetProfile {
+  id           String   @id @default(cuid())
+  cash         BigInt
+  income       BigInt
+  spouseIncome BigInt
+  married      Boolean
+  firstHome    Boolean
+  debts        Json
+  reserves     Json
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

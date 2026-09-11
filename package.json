@@ -1,0 +1,52 @@
+{
+  "name": "home-today",
+  "version": "0.1.0",
+  "private": true,
+  "overrides": {
+    "@prisma/config": {
+      "effect": "^3.20.0",
+      "deepmerge-ts": "^8.0.0"
+    }
+  },
+  "scripts": {
+    "dev": "node scripts/run.mjs dev",
+    "build": "node scripts/run.mjs build --webpack",
+    "postinstall": "prisma generate",
+    "start": "node scripts/run.mjs start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/run.mjs test",
+    "db:generate": "node scripts/run.mjs prisma generate",
+    "db:migrate": "node scripts/run.mjs prisma migrate dev",
+    "db:seed": "node scripts/run.mjs seed",
+    "test:e2e": "node scripts/run.mjs e2e"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.0",
+    "decimal.js": "latest",
+    "lucide-react": "latest",
+    "next": "16.3.4",
+    "react": "latest",
+    "react-dom": "latest",
+    "recharts": "latest",
+    "server-only": "latest",
+    "zod": "latest",
+    "zustand": "latest"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "@tailwindcss/postcss": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "eslint": "latest",
+    "eslint-config-next": "16.3.4",
+    "node": "22.22.0",
+    "prettier": "^3.9.6",
+    "prisma": "6.19.0",
+    "tailwindcss": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "vitest": "latest"
+  }
+}
